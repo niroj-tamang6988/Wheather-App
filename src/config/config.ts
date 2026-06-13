@@ -1,12 +1,12 @@
-//API Service layer
+
 
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY
 
 const BASE_URL = import.meta.env.VITE_WEATHER_BASE_URL
 
 export const apiClient = async(
-    endpoint: string, 
-    options: RequestInit = {} //requestInit is request method
+    endpoint: string,   
+    options: RequestInit = {} 
 ): Promise<any> =>{
 
     const url = `${BASE_URL}${endpoint}?key=${API_KEY}`

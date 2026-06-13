@@ -4,28 +4,28 @@ const PastForecast = ({ city }: { city: string }) => {
     const [days, setDays] = useState<any[]>([]);
 
     useEffect(() => {
-        if (!city) return;
-        setDays([]);
+        if (!city) return; // skip if no city
+        setDays([]); // reset old data
 
-        const today = new Date();
+        const today = new Date(); // today's date
         const promises = Array.from({ length: 7 }, (_, i) => {
             const date = new Date(today);
-            date.setDate(today.getDate() - (i + 1));
-            const dateStr = date.toISOString().split("T")[0];
+            date.setDate(today.getDate() - (i + 1)); // go back each day
+            const dateStr = date.toISOString().split("T")[0]; // format date
             return fetch(
-                `${import.meta.env.VITE_WEATHER_BASE_URL}/history.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${city}&dt=${dateStr}`
+                `${import.meta.env.VITE_WEATHER_BASE_URL}/history.json?key=${import.meta.env.VITE_WEATHER_API_KEY}&q=${city}&dt=${dateStr}` // fetch from api
             )
                 .then((res) => {
-                    if (!res.ok) throw new Error("History not found");
-                    return res.json();
+                    if (!res.ok) throw new Error("History not found"); // bad response
+                    return res.json(); // parse json
                 })
-                .then((data) => data.forecast.forecastday[0]);
+                .then((data) => data.forecast.forecastday[0]); // grab day
         });
 
-        Promise.all(promises)
-            .then((results) => setDays(results))
-            .catch((err) => console.error(err));
-    }, [city]);
+        Promise.all(promises) // wait all fetches
+            .then((results) => setDays(results)) // save all days
+            .catch((err) => console.error(err)); // log error
+    }, [city]); // run on city change
 
     return (
         <div>

@@ -6,13 +6,13 @@ import DailyForecast from "../Components/DailyForecast"
 import PastForecast from "../Components/PastForecast"
 
 const Home = () => {
-    const [city, setCity] = useState("Kathmandu");
-    const [loading, setLoading] = useState(false);
+    const [city, setCity] = useState("Kathmandu"); // default city
+    const [loading, setLoading] = useState(false); // loading state
 
     const handleSearch = (newCity: string) => {
-        setLoading(true);
-        setCity(newCity);
-        setTimeout(() => setLoading(false), 1000);
+        setLoading(true); // start loading
+        setCity(newCity); // update city
+        setTimeout(() => setLoading(false), 1000); // stop loading
     };
 
     return(

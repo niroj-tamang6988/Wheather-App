@@ -10,12 +10,12 @@ interface Props{
 }
 const SearchWeather = ({ onSearch, loading, accent}: Props) => {
 
-    const [input,setInput] =useState("");
+    const [input,setInput] =useState(""); // track input
 
     const handleSubmit = (e: FormEvent) => {
-        e.preventDefault(); //stop page reload when form submit
-        if(input.trim()) //remove spaces
-            onSearch(input.trim()); //call onSearch
+        e.preventDefault(); // stop page reload
+        if(input.trim()) // remove spaces
+            onSearch(input.trim()); // call search
             
         };
             return(
